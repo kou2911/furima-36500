@@ -2,16 +2,16 @@
 
 ## usersテーブル
 
-| Column             | Type   | Option        |
-| ------------------ | -----  | ------------  |
-| email              | string | null: false   |
-| password           | string | null: false   |
-| nickname           | string | null: false   |
-| last_name          | string | null: false   |
-| first_name         | string | null: false   |
-| last_name_reading  | string | null: false   |
-| first_name_reading | string | null: false   |
-| birthday           | date   | null: false   |
+| Column             | Type   | Option                      |
+| ------------------ | -----  | ------------------------    |
+| email              | string | null: false, unique: true   |
+| encrypted_password | string | null: false                 |
+| nickname           | string | null: false                 |
+| last_name          | string | null: false                 |
+| first_name         | string | null: false                 |
+| last_name_reading  | string | null: false                 |
+| first_name_reading | string | null: false                 |
+| birthday           | date   | null: false                 |
 
 ## Association
 
@@ -60,7 +60,7 @@
 | municipalities     | string    | null: false                     |
 | block_number       | string    | null: false                     |
 | building           | string    |                                 |
-| phone_number       | integer   | null: false                     |
+| phone_number       | string    | null: false                     |
 | order              | reference | null: false, foreign_key: true  |
 
 
