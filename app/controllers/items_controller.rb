@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new,:edit]
-  before_action :find, only:[:show,:edit,:update]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :find, only: [:show, :edit, :update, :destroy]
   before_action :move_index, only: [:edit]
 
   def index
@@ -34,19 +34,23 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
+
   private
 
   def item_params
-    params.require(:item).permit(:image, :item_name, :text, :category_id, :status_id, :delivery_fee_id, :prefecture_id, :sipping_day_id,:price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :text, :category_id, :status_id, :delivery_fee_id, :prefecture_id,
+                                 :sipping_day_id, :price).merge(user_id: current_user.id)
   end
 
   def move_index
-    unless @item.user.id == current_user.id
-      redirect_to action: :index 
-    end
+    redirect_to action: :index unless @item.user.id == current_user.id
   end
 
   def find
-    @item =Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 end
