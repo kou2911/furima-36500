@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new,:edit]
   before_action :move_index, only: [:edit]
 
   def index
@@ -45,6 +45,8 @@ class ItemsController < ApplicationController
 
   def move_index
     @item = Item.find(params[:id])
-    redirect_to action: :index unless @item.user.id == current_user.id
+    unless @item.user.id == current_user.id
+      redirect_to action: :index 
+    end
   end
 end
