@@ -1,11 +1,12 @@
 class OrderAddress
   include ActiveModel::Model
 
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :block_number,:building, :phone_number
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :block_number,:building, :phone_number, :token
 
 
   validates :municipalities, presence: true
   validates :block_number, presence: true
+  validates :token       ,presence: true
 
   with_options presence: true do
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
