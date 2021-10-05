@@ -40,10 +40,14 @@ class OrdersController < ApplicationController
   end
 
   def move_user
-    redirect_to root_path if @item.user_id == current_user.id
+    if @item.user_id == current_user.id
+      redirect_to root_path 
+    end
   end
 
   def move_item
-    redirect_to root_path if @item.order.present?
+     if @item.order.present?
+      redirect_to root_path
+     end
   end
 end
