@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
-  before_action :find, only: [:show, :edit, :update, :destroy]
+  before_action :find, only: [:edit, :update, :destroy]
   before_action :move_index, only: [:edit, :destroy]
 
   def index
@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
   def edit
@@ -47,10 +48,12 @@ class ItemsController < ApplicationController
   end
 
   def move_index
-    redirect_to action: :index unless @item.user.id == current_user.id
-  end
+    redirect_to action: :index
+    unless @item.user.id == current_user.id
+    end
 
-  def find
-    @item = Item.find(params[:id])
+    def find
+      @item = Item.find(params[:id])
+    end
   end
 end
