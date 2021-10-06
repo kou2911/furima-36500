@@ -51,7 +51,7 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     it 'prefecture_idが0だと購入できない' do
-      @order_address.prefecture_id = '0'
+      @order_address.prefecture_id = 0
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
     end
