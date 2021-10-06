@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
-  before_action :find, only: [:edit,:create, :show, :update, :destroy]
+  before_action :find, only: [:edit, :show, :update, :destroy]
   before_action :move_index, only: [:edit, :destroy]
 
   def index
@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
