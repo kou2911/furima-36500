@@ -3,13 +3,13 @@ class OrderAddress
 
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :block_number, :building, :phone_number, :token
 
-  validates :municipalities, presence: true
-  validates :block_number, presence: true
-  validates :token, presence: true
-  validates :user_id, presence: true
-  validates :item_id,    presence: true
 
   with_options presence: true do
+    validates :municipalities
+    validates :block_number
+    validates :token
+    validates :user_id
+    validates :item_id
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/

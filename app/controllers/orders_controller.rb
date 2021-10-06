@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :found,     only: [:index, :create]
   before_action :move_item, only: [:index, :create]
   before_action :move_user, only: [:index, :create]
@@ -36,14 +37,12 @@ class OrdersController < ApplicationController
   end
 
   def move_user
-    @item = Item.find(params[:item_id])
     if @item.user_id == current_user.id
       redirect_to root_path 
     end
   end
 
   def move_item
-    @item = Item.find(params[:item_id])
      if @item.order.present?
       redirect_to root_path
      end
